@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="mx-auto my-5" style="max-width: 23rem">
+        <div class="card panels-card">
+          <div class="rounded-top" style="background-color: #e0e0e0"></div>
+          <div class="card-body rounded-bottom text-dark" style="background-color: #fafafa">
+            <div class="row">
+              <div class="col-6 p-1">
+                <div class="card" style="background-color: #e0e0e0">
+                  <div class="card-body pb-0">
+                    <i class="fas fa-cloud fa-3x pb-4"></i>
+                    <div class="d-flex justify-content-between">
+                      <i class="bi bi-thermometer-sun" style="font-size: 1.4rem"></i>
+                      <p class="mb-0 h5" id="indexUv"></p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="card-body pt-0">
+                    <h6 class="font-weight-bold mb-1">Index UV</h6>
+                    <p class="mb-0">Jakarta</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 p-1">
+                <div class="card" style="background-color: #ffcc80">
+                  <div class="card-body pb-0">
+                    <i class="fas fa-sun fa-3x pb-4"></i>
+                    <div class="d-flex justify-content-between">
+                      <i class="bi bi-eye-fill" style="font-size: 1.4rem"></i>
+                      <p class="mb-0 h5" id="visibility"></p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="card-body pt-0">
+                    <h6 class="font-weight-bold mb-1">Jarak Pandang</h6>
+                    <p class="mb-0">Jakarta</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 p-1">
+                <div class="card" style="background-color: #9fa8da">
+                  <div class="card-body pb-0">
+                    <i class="fas fa-tint fa-3x pb-4"></i>
+                    <div class="d-flex justify-content-between">
+                      <i class="bi bi-brightness-high-fill" style="font-size: 1.4rem"></i>
+                      <p class="mb-0 h5 text-end" id="matahari"></p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="card-body pt-0">
+                    <h6 class="font-weight-bold mb-1">Posisi Matahari</h6>
+                    <p class="mb-0">Jakarta</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
