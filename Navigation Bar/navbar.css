@@ -1,3 +1,8 @@
+body {
+  background: linear-gradient(180deg, #234072 0%, #000000 94.27%);
+  background-blend-mode: multiply;
+}
+
 p {
   font-family: 'Inter';
   text-align: justify;
@@ -116,3 +121,66 @@ footer {
   font-size: 70px;
   text-align: center;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+
+h1 {
+  margin-top: 0;
+}
+
+#weatherInfo1 {
+  margin-top: 20px;
+  /* text-align: left; */
+}
+
+#temperature,
+#city,
+#weatherDescription,
+#feelsLike,
+#humidity,
+#rainChance {
+  margin-bottom: 10px;
+}
+progress{
+  border-radius: 25%;
+}
+
+.container {
+  margin-left: 50px;
+  width: 379px;
+  height: 288px;
+  background-color: #1A2840;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.dasbord {
+  color: white;
+  display: flex;
+  justify-content: space-between; 
+  margin:20px;
+}
+
+.terasaseperti,
+.kelembaban,
+.peluanghujan
+{
+  width: 100px;
+  height: 60px;
+  background-color: #3B6083;
+  border-radius: 5px 5px 5px 5px;
+}
+
