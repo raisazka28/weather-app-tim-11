@@ -7,6 +7,24 @@ p {
   font-family: 'Inter';
   text-align: justify;
   text-align-last: center;
+  color: white;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: flex;
+  float: left;
+}
+
+.text {
+  display: flex;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  color: #FFFFFF;
 }
 
 ul.navbar {
@@ -20,60 +38,35 @@ ul.navbar li a {
   float: right;
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 15px;
   line-height: 29px;
   display: block;
-  color: #111;
+  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 ul.navbar li a:hover {
-  color: #884A39;
-}
-
-ul.navbar li a#logo {
-  float: left;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 29px;
-  display: block;
-  color: #111;
-  text-align: left;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.logo {
-  font-family: 'Inter';
-  text-align: left;
-  padding: 20px;
-  font-size: 15px;
-}
-
-.logo img {
-  max-width: 150px;
+  color: #0E2954;
 }
 
 footer {
     font-family: 'Inter';
     padding: 20px;
-    color: black;
     text-align: center;
     font-size: 12px;
   }
 
 #about {
+  color: #FFFFFF;
   font-family: 'Inter';
   text-align: center;
   width: 300px;
   padding: 15px;
   margin: 0 auto;
-  background: #D9D9D9;
+  background: #1A2840;
   border-radius: 50px;
 }
 
@@ -83,14 +76,14 @@ footer {
   text-align-last: center;
 }
 
-.container {
+.containerAbout {
   display: flex;
   justify-content: center;
 }
 
 .box {
   border: 1px;
-  background: #F5F5F5;
+  background: #1A2840;
   padding: 10px;
   text-align: center;
   font-family: 'Inter';
@@ -106,15 +99,16 @@ footer {
 
 .box a {
   text-decoration: none; 
-  color: #000;
+  color: #FFFFFF;
   display: block; 
 }
 
 .box a:hover {
-  background-color: #eee; 
+  background-color: ; 
 }
 
 #title {
+  color: white;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
@@ -137,15 +131,14 @@ body {
   background-color: #fff;
 }
 
-
 h1 {
   margin-top: 0;
 }
 
 #weatherInfo1 {
   margin-top: 20px;
-  /* text-align: left; */
-}
+  text-align: left;
+} 
 
 #temperature,
 #city,
