@@ -1,41 +1,55 @@
-window.addEventListener('load', () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const apiKey = '559bb81ceb5f6f48b0fb1e4eeb0bca23';
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
-        console.log(position);
-        fetch(url)
-          .then(response => response.json())
-          .then(data => {
-            const temperature = (data.main.temp - 273.15).toFixed(1);
-            const feelsLike = (data.main.feels_like - 273.15).toFixed(1);
-            const weatherDescription = data.weather[0].description;
-            const humidity = data.main.humidity;
-            const rainChance = data.clouds.all;
-            const city=data.name;
-            console.log(data);
-            document.getElementById('city').textContent = `${city}`;
-            document.getElementById('temperature').textContent = `${temperature}°C`;
-            document.getElementById('weatherDescription').textContent = `${weatherDescription}`;
-            document.getElementById('feelsLike').textContent = `Feels Like: ${feelsLike}°C`;
-            document.getElementById('humidity').textContent = `Humidity: ${humidity}%`;
-            document.getElementById('rainChance').textContent = `Rain Chance: ${rainChance}%`;
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+window.addEventListener('DOMContentLoaded', () => {
+  const locationElement = document.getElementById('location');
+  const temperatureElement = document.getElementById('temperature');
+  const weatherDescriptionElement = document.getElementById('weather-description');
+  const weatherIconElement = document.getElementById('weather-icon');
+  const feelsLikeElement = document.getElementById('feels-like');
+  const humidityElement = document.getElementById('humidity');
+  const rainChanceElement = document.getElementById('rain-chance');
 
-      }, error => {
-        console.error('Error:', error);
-      });
-    } else {
-      console.error('Geolocation is not supported by this browser.');
+  // Mendapatkan data cuaca menggunakan geolokasi
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      getWeatherData(latitude, longitude);
+    },
+    (error) => {
+      console.error('Error getting location:', error);
     }
+  );
+console.log (position);
+  // Mendapatkan data cuaca dari API
+  function getWeatherData(latitude, longitude) {
+    const apiKey = '559bb81ceb5f6f48b0fb1e4eeb0bca23';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
- 
-  });
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const location = data.name;
+        const temperature = `${data.main.temp}°C`;
+        const weatherDescription = data.weather[0].description;
+        const weatherIcon = data.weather[0].icon;
+        const feelsLike = `${data.main.feels_like}°C`;
+        const humidity = `${data.main.humidity}%`;
+        const rainChance = '20%';
+
+        // Menampilkan data cuaca ke elemen HTML
+        locationElement.textContent = `Lokasi: ${location}`;
+        temperatureElement.textContent = `Suhu: ${temperature}`;
+        weatherDescriptionElement.textContent = `Cuaca: ${weatherDescription}`;
+        weatherIconElement.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">`;
+        feelsLikeElement.textContent = `Terasa Seperti: ${feelsLike}`;
+        humidityElement.textContent = `Kelembapan: ${humidity}`;
+        rainChanceElement.textContent = `Peluang Hujan: ${rainChance}`;
+      })
+      .catch((error) => {
+        console.error('Error fetching weather data:', error);
+      });
+  }
+});
 
   //ini js buat air quality
   window.addEventListener('load', () => {
@@ -156,49 +170,60 @@ window.addEventListener('load', () => {
     }
   });
 
-  window.addEventListener('DOMContentLoaded', () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getWeatherForecast);
-    } else {
-      console.log('Geolokasi tidak didukung oleh browser.');
-    }
-  });
-  
-  function getWeatherForecast(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    const API_KEY = '559bb81ceb5f6f48b0fb1e4eeb0bca23';
-    console.log(position);
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
-      .then(response => response.json())
-      .then(data => {
-        const forecasts = data.list;
-        const table = document.getElementById('weather-table');
-  
-        forecasts.forEach(forecast => {
-          const date = forecast.dt_txt.split(' ')[0];
-          const weather = forecast.weather[0].description;
-          const temperature = forecast.main.temp;
-          const humidity = forecast.main.humidity;
-  
-          const row = document.createElement('div');
-          row.classList.add('weather-row');
-          row.innerHTML = `
-            <div class="weather-date">${date}</div>
-            <div class="weather-info">
-              <div class="weather-description">${weather}</div>
-              <div class="weather-temperature">${temperature}°C</div>
-              <div class="weather-humidity">Kelembapan: ${humidity}%</div>
-            </div>
-          `;
-  
-          table.appendChild(row);
+  window.addEventListener('load', () => {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            const apiKey = "03f9ab02cf8566dd0bb9cd990be51fa5";
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const weatherContainer = document.getElementById('weather-container');
+                    const forecasts = data.list;
+
+                    for (let i = 0; i < forecasts.length; i += 8) {
+                        const forecast = forecasts[i];
+                        const date = forecast.dt_txt.split(' ')[0];
+                        const temperature = Math.round(forecast.main.temp);
+                        const description = forecast.weather[0].description;
+                        const iconCode = forecast.weather[0].icon;
+
+                        const weatherCard = document.createElement('div');
+                        weatherCard.classList.add('weather-card');
+
+                        const weatherDate = document.createElement('div');
+                        weatherDate.classList.add('weather-date');
+                        weatherDate.textContent = date;
+
+                        const weatherIcon = document.createElement('img');
+                        weatherIcon.classList.add('weather-icon');
+                        weatherIcon.src = `https://openweathermap.org/img/w/${iconCode}.png`;
+
+                        const weatherDescription = document.createElement('div');
+                        weatherDescription.classList.add('weather-description');
+                        weatherDescription.textContent = description;
+
+                        const weatherTemperature = document.createElement('div');
+                        weatherTemperature.textContent = `${temperature}°C`;
+
+                        weatherCard.appendChild(weatherDate);
+                        weatherCard.appendChild(weatherIcon);
+                        weatherCard.appendChild(weatherDescription);
+                        weatherCard.appendChild(weatherTemperature);
+
+                        weatherContainer.appendChild(weatherCard);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching weather data:", error);
+                });
         });
-      })
-      .catch(error => {
-        console.log('Terjadi kesalahan:', error);
-      });
-  }
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+});
   
   //ini yang index uv dan jarak pandang
 // Jarak Pandang
