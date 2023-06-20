@@ -9,6 +9,7 @@ nav {
   position: fixed;
   top: 0;
   z-index: 100;
+  background-color: #0E2954;
 }
 
 .logo {
@@ -145,14 +146,6 @@ h1 {
 #humidity,
 #rainChance {
   margin-bottom: 10px;
-}
-
-.container {
-  /* margin-left: 50px; */
-  /* width: 379px; */
-  /* height: 288px; */
-  /* background-color: #1A2840; */
-  /* border-radius: 10px 10px 10px 10px; */
 }
 
 .dasbord {

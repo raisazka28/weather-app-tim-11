@@ -13,8 +13,8 @@ body {
     max-width: 100vw;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    max-height: 100vh;
+    height: 150vh;
+    max-height: 150vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -35,7 +35,7 @@ body {
     text-align: center;
     width: 300px;
     padding: 15px;
-    margin: 0;
+    margin-top: 75px;
     background: #1A2840;
     border-radius: 50px;
     display: block;
@@ -99,17 +99,6 @@ body {
     background-color: var(--widget-secondary-dark);
   }
 
-  /* .box a > h3::after {
-    content: "";
-    z-index: ;
-    position: absolute;
-    background-color: var(--widget-secondary-dark);
-    width: 100%;
-    left: 0;
-    height: 100%;
-  } */
-
   .box:hover {
-    /* background-color: ;  */
     box-shadow: 0px 0px 24px -3px rgba(92, 96, 112, 0.8);
   }

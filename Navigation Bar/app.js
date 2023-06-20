@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const rainChance = '20%';
 
         // Menampilkan data cuaca ke elemen HTML
-        // locationElement.textContent = `Lokasi: ${location}`;
+        locationElement.textContent = `${location}`;
         animateValue(temperatureElement, parseInt(temperature), '°C')
         weatherDescriptionElement.textContent = `${weatherDescription}`;
         weatherIconElement.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">`;
@@ -88,19 +88,8 @@ window.addEventListener('DOMContentLoaded', () => {
             let aq = data.list[0].main.aqi
             let classs = "progress w-full "
   
-            // document.getElementById('so2').setAttribute('value',so2)
-            // document.getElementById('co').setAttribute('value',co)
-            // document.getElementById('nh3').setAttribute('value',nh3)
-            // document.getElementById('no').setAttribute('value',no)
-            // document.getElementById('no2').setAttribute('value',no2)
-            // document.getElementById('o3').setAttribute('value',o3)
-            // document.getElementById('pm10').setAttribute('value',pm10)
-            // document.getElementById('pm2_5').setAttribute('value',pm2_5)
             animateValue(document.getElementById('aq-size'), parseInt(aq))
-            // document.getElementById('aq-size').innerText = aq
-            // document.getElementById('persentase').setAttribute('value', jumlah)
-            // document.getElementById('persentase').setAttribute('class', classs+"progress"+celas(jumlah))
-            // document.getElementById('persentase-t').innerText = jumlah.toString().slice(0, 3) + "%"
+
             document.getElementById('keterangan').innerText = ket(jumlah)
             document.getElementById('keterangan').setAttribute('class',"font-bold text-xl text"+celasColor(jumlah)+"-500")
             document.getElementById('aqi-level').setAttribute('style', `width: ${jumlah > 300 ? 100 : jumlah / 300 * 100}%`)
@@ -118,11 +107,11 @@ window.addEventListener('DOMContentLoaded', () => {
   
   function ket(value) {
     console.log('ket', value)
-    if (value >= 0 && value <= 20) return "Sangat Sehat"
-    if (value >= 21 && value <= 40) return "Sehat"
-    if (value >= 41 && value <= 60) return "Cukup Tercemar"
-    if (value >= 61 && value <= 80) return "Tercemar"
-    if (value >= 81 && value <= 100) return "Sangat Tercemar"
+    if (value >= 0 && value <= 20) return "Very Healthy"
+    if (value >= 21 && value <= 40) return "Healthy"
+    if (value >= 41 && value <= 60) return "Moderately Polluted"
+    if (value >= 61 && value <= 80) return "Polluted"
+    if (value >= 81 && value <= 100) return "Very Polluted"
   }
   function celas(value) {
     if (value >= 0 && value <= 20) return "-info"
@@ -252,9 +241,6 @@ window.addEventListener("DOMContentLoaded", function () {
           .then((response) => response.json())
           .then((data) => {
             const visibility = data.visibility / 1000;
-
-            // const visibilityElement = document.getElementById("visibility");
-            // visibilityElement.textContent = `${visibility} km`;
           })
           .catch((error) => {
             console.log("Error:", error);
@@ -264,8 +250,6 @@ window.addEventListener("DOMContentLoaded", function () {
       },
       function (error) {
         console.log("Error:", error);
-        // const visibilityElement = document.getElementById("visibility");
-        // visibilityElement.textContent = "Geolocation is not supported by this browser";
       }
     );
   } else {
@@ -309,9 +293,6 @@ window.addEventListener("load", function () {
 
       var sunriseAngle = ((sunriseHours * 60 + sunriseMinutes) / 1440) * 360;
       var sunsetAngle = ((sunsetHours * 60 + sunsetMinutes) / 1440) * 360;
-
-      // var sunriseSunsetElement = document.getElementById("matahari");
-      // sunriseSunsetElement.innerHTML = sunriseAngle.toFixed(2) + "&deg - " + sunsetAngle.toFixed(2) + "&deg";
     })
     .catch(function (error) {
       console.log("Error:", error);
@@ -320,7 +301,7 @@ window.addEventListener("load", function () {
 
 //ini rekomendasi kegiatan
 function getWeather(latitude, longitude) {
-  var apiKey = "03f9ab02cf8566dd0bb9cd990be51fa5"; // Ganti <API_KEY> dengan kunci API Anda dari OpenWeatherMap
+  var apiKey = "03f9ab02cf8566dd0bb9cd990be51fa5";
 
   var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
 
@@ -335,35 +316,32 @@ function getWeather(latitude, longitude) {
           var activities = [];
 
           if (description.includes("rain")) {
-              activities.push("Membawa payung atau jas hujan jika bepergian");
-              activities.push("Membaca buku di dalam ruangan");
-              activities.push("Menonton film sambil minum teh hangat");
+              activities.push("Eating indomie");
+              activities.push("Meditating in the room");
+              activities.push("Watch a movie while drinking hot tea");
           } else if (description.includes("cloud")) {
-              activities.push("Berjalan-jalan di taman");
-              activities.push("Mengunjungi museum atau galeri seni");
-              activities.push("Bermain olahraga di luar ruangan");
+              activities.push("Take a walk in the park");
+              activities.push("Visit a museum or art gallery");
+              activities.push("Play sports outdoors");
           } else if (description.includes("clear")) {
               var temperature = data.main.temp;
 
               if (temperature > 25) {
-                  activities.push("Berenang atau bermain air di pantai atau kolam renang");
-                  activities.push("Piknik di taman");
-                  activities.push("Mengunjungi taman hiburan");
+                  activities.push("Swimming or splashing at the beach or pool");
+                  activities.push("Picnic at the park");
+                  activities.push("Visiting amusement parks");
               } else {
-                  activities.push("Berjalan-jalan di taman");
-                  activities.push("Berpiknik di taman");
-                  activities.push("Bermain sepak bola di lapangan");
+                  activities.push("Take a walk in the park");
+                  activities.push("Picnic in the park");
+                  activities.push("Play soccer on the field");
               }
           } else if (description.includes("snow")) {
-              activities.push("Bermain ski atau snowboarding di resor ski");
-              activities.push("Membuat manusia salju");
-              activities.push("Bermain olahraga salju seperti luncur atau bermain snowball");
+              activities.push("Skiing or snowboarding at a ski resort");
+              activities.push("Making a snowman");
+              activities.push("Play snow sports like sledding or snowball fights");
           } else {
-              activities.push("Cuaca saat ini tidak dapat dikenali, silakan coba lagi nanti");
+              activities.push("The current weather cannot be recognized, please try again later");
           }
-
-          // var activityList = document.getElementById("activityList");
-          // activityList.innerHTML = "";
 
           const activitiesContainer = document.getElementById("list-container");
 
@@ -386,13 +364,11 @@ function getLocation() {
           var longitude = position.coords.longitude;
 
           var locationText = "Lokasi saat ini: " + latitude.toFixed(2) + ", " + longitude.toFixed(2);
-          // document.getElementById("location").textContent = locationText;
 
           getWeather(latitude, longitude);
       }, function () {
           var errorText = document.createElement("p");
           errorText.textContent = "Tidak dapat mengakses lokasi.";
-          // document.getElementById("activityList").appendChild(errorText);
       });
   } else {
       var errorText = document.createElement("p");

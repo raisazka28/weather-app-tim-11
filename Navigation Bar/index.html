@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <title>HAWA App</title>
+  <link rel="icon" href="Logo/HAWA.png" type="image/png">
 
   <!-- Index UV Bootstrap -->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 </head>
 <body>
@@ -26,7 +26,6 @@
       <a class="active nav__menu">Home</a>
       <a class="nav__menu" href="livechat.html">Live Chat</a>
       <a class="nav__menu" href="about.html">About Us</a>
-      <a class="nav__menu" href="#">Sign Up</a>
     </div>
   </nav>
 
@@ -36,7 +35,7 @@
       <div class="weather__header">
         <div class="weather__heading">
           <img src="assets/icon/season 1.png" alt="Weather Icon">
-          <h3>Weather</h3>
+          <h3 id="location"></h3>
         </div>
         <div id="weather-icon"></div>
         <div class="weather__temp">
@@ -47,18 +46,17 @@
       <!-- Widgets -->
       <div class="weather__infos">
         <div class="widget__container--small">
-          <span class="small-widget__label">Terasa Seperti</span>
+          <span class="small-widget__label">Feels Like</span>
           <h3 id="feels-like">0°C</h3>
         </div>
         <div class="widget__container--small">
-          <span class="small-widget__label">Kelembaban</span>
+          <span class="small-widget__label">Humidity</span>
           <h3 id="humidity">0%</h3>
         </div>
         <div class="widget__container--small">
-          <span class="small-widget__label">Peluang Hujan</span>
+          <span class="small-widget__label">Rain Chance</span>
           <h3 id="rain-chance">0%</h3>
         </div>
-      </div>
       </div>
     </div>
 
@@ -83,14 +81,13 @@
         <div class="widget__container--small">
           <div class="progress__bar">
             <div class="progress__label">
-              <span class="progress__label--text">Bersih</span>
-              <span class="progress__label--text">Tercemar</span>
+              <span class="progress__label--text">Healthy</span>
+              <span class="progress__label--text">Polluted</span>
             </div>
             <div class="progress-bar__container">
               <div id="aqi-level"></div>
             </div>
           </div>
-          <!-- <progress value="10" id="persentase" max="200"></progress> -->
         </div>
       </div>
     </div>
@@ -103,7 +100,7 @@
         <img src="assets/icon/panas 1.png" alt="UV Icon" />
         <div class="iuv__data">
           <h1 id="indexUv">0 UVI</h1>
-          <span>Jangan lupa pakai sunscreen ya</span>
+          <span>Don't forget to put on sunscreen!</span>
         </div>
       </div>
     </div>
@@ -111,14 +108,13 @@
     <!-- Weather Forecast -->
     <div class="forecast__container">
       <div class="forecast__today">
-        <h3>Perkiraan Cuaca/Jam</h3>
+        <h3>3-Hour Weather Forecast</h3>
         <div id="forecast-today" class="today__container"></div>
       </div>
 
       <div class="forecast__next-week">
-        <h3>Next 7 Days</h3>
-        <div id="forecast-week" class="week__container">
-        </div>
+        <h3>Next Days Forecast</h3>
+        <div id="forecast-week" class="week__container"></div>
       </div>
     </div>
 
@@ -127,24 +123,13 @@
 
     <!-- Recommended Task -->
     <div class="task__container">
-      <h3>Rekomendasi Kegiatan</h3>
+      <h3>Activity Recommendation</h3>
       <div id="list-container" class="tasks__list"></div>
     </div>
   </section>
 
-  <!-- Ini Air Quality -->
-  
-  <!-- Ini Perkiraan Cuaca Perjam -->
-  
-  
-  <!-- Ini Perkiraan Cuaca 7 Hari -->
-  
-  
   <!-- Ini Index UV -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  
-  <!-- Ini Rekomendasi -->
-  
   
   <script src="app.js"></script>
 
