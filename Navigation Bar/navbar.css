@@ -1,21 +1,75 @@
-body {
-  background: linear-gradient(180deg, #234072 0%, #000000 94.27%);
-  background-blend-mode: multiply;
-}
+@import url('variables.css');
 
-p {
-  font-family: 'Inter';
-  text-align: justify;
-  text-align-last: center;
-  color: white;
+nav {
+  width: 100%;
+  padding: 2.4vh 2.4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
-  width: 100px;
-  height: 100px;
-  margin: 20px;
   display: flex;
-  float: left;
+  align-items: center;
+  gap: .5rem;
+}
+
+.logo__image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.nav__menu {
+  position: relative;
+  font-weight: 400;
+}
+
+.active {
+  font-weight: 700 !important;
+}
+
+.nav__menu::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  border-radius: 50vw;
+  bottom: -3px;
+  height: 2px;
+  width: 0;
+  background-color: var(--white);
+  transition: width .25s ease-in-out;
+}
+
+.nav__menu:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  border-radius: 50vw;
+  bottom: -3px;
+  height: 2px;
+  width: 100%;
+  background-color: var(--white);
+  transition: width .25s ease-in-out;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  border-radius: 50vw;
+  bottom: -3px;
+  height: 2px;
+  width: 100%;
+  background-color: var(--white);
 }
 
 .text {
@@ -59,54 +113,6 @@ footer {
     font-size: 12px;
   }
 
-#about {
-  color: #FFFFFF;
-  font-family: 'Inter';
-  text-align: center;
-  width: 300px;
-  padding: 15px;
-  margin: 0 auto;
-  background: #1A2840;
-  border-radius: 50px;
-}
-
-.aboutus {
-  font-family: 'Inter';
-  text-align: justify;
-  text-align-last: center;
-}
-
-.containerAbout {
-  display: flex;
-  justify-content: center;
-}
-
-.box {
-  border: 1px;
-  background: #1A2840;
-  padding: 10px;
-  text-align: center;
-  font-family: 'Inter';
-  font-size: 15px;
-  margin: 0 10px; 
-}
-
-.box img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-
-.box a {
-  text-decoration: none; 
-  color: #FFFFFF;
-  display: block; 
-}
-
-.box a:hover {
-  background-color: ; 
-}
-
 #title {
   color: white;
   font-family: 'Inter';
@@ -121,14 +127,6 @@ body {
   background-color: #f2f2f2;
   margin: 0;
   padding: 0;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-  background-color: #fff;
 }
 
 h1 {
@@ -148,16 +146,13 @@ h1 {
 #rainChance {
   margin-bottom: 10px;
 }
-progress{
-  border-radius: 25%;
-}
 
 .container {
-  margin-left: 50px;
-  width: 379px;
-  height: 288px;
-  background-color: #1A2840;
-  border-radius: 10px 10px 10px 10px;
+  /* margin-left: 50px; */
+  /* width: 379px; */
+  /* height: 288px; */
+  /* background-color: #1A2840; */
+  /* border-radius: 10px 10px 10px 10px; */
 }
 
 .dasbord {

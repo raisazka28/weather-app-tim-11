@@ -1,156 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="navbar.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <title>HAWA App</title>
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" type="text/css" href="home.css" />
+  <link rel="stylesheet" type="text/css" href="navbar.css" />
 
-<!-- Index UV Bootstrap -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" /> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" /> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>HAWA App</title>
+
+  <!-- Index UV Bootstrap -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 </head>
 <body>
-  <nav class="navigationBar">
+  <nav>
     <div class="logo">
-      <img src="Logo/HAWA.png" alt="Logo Website">
+      <img class="logo__image" src="Logo/HAWA.png" alt="Logo Website">
+      <h2 class="logo__text">
+        Hawa App
+      </h2>
     </div>
-    <div class="text">
-      <h2>HAWA App</h2>
+    <div class="navbar-menu">
+      <a class="active nav__menu">Home</a>
+      <a class="nav__menu" href="livechat.html">Live Chat</a>
+      <a class="nav__menu" href="about.html">About Us</a>
+      <a class="nav__menu" href="#">Sign Up</a>
     </div>
-    <ul class="navbar">
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="livechat.html">Live Chat</a></li>
-        <li><a href="index.html">Home</a></li>
-    </ul>
   </nav>
 
-    <!-- Ini Dashboard Cuaca -->
-    <div class="weather-container">
-      <h1>Weather App</h1>
-      <div id="location"></div>
-      <div id="temperature"></div>
-      <div id="weather-description"></div>
-      <div id="weather-icon"></div>
-      <div id="feels-like"></div>
-      <div id="humidity"></div>
-      <div id="rain-chance"></div>
-    </div>
-
-    <!-- Ini Air Quality -->
-    <div class="container">
-        
-        <div id="weatherInfo1" class="dasbord flex flex-around justify-center text-center w-full gap-6">
-          <div
-            class="card w-96 border-[1px] hover:shadow-blue-300 hover:border-blue-400 border-gray-300 hover:-translate-y-3 transition-all ease duration-500 hover:scale-105 bg-base-100 shadow-sm hover:shadow-lg">
-            <div class="card-body">
-              <div class="flex flex-col justify-center items-center">
-                <div>
-                  <div>
-                    <p class="font-bold">Persentase Tercemar</p>
-                    <p id="persentase-t"></p>
-                    <progress value="10" id="persentase" max="100"></progress>
-                    <p>Kualitas Udara</p>
-                    <p id="keterangan"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="card-actions justify-end">
-              </div>
-            </div>
-          </div>
+  <section class="container">
+    <!-- Dashboard Cuaca -->
+    <div class="widget__container--big weather__container">
+      <div class="weather__header">
+        <div class="weather__heading">
+          <img src="assets/icon/season 1.png" alt="Weather Icon">
+          <h3>Weather</h3>
+        </div>
+        <div id="weather-icon"></div>
+        <div class="weather__temp">
+          <h1 id="temperature">0°C</h1>
+          <span id="weather-description">Clouds</span> 
         </div>
       </div>
-
-      <!-- Ini Perkiraan Cuaca Perjam -->
-      <div class="container">
-        <h1>Weather Forecast</h1>
-        <table id="weatherTable">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Temperature (°C)</th>
-              <th>Weather</th>
-              <th>Humidity (%)</th>
-            </tr>
-          </thead>
-          <tbody id="weatherData">
-            <!-- Weather data will be dynamically added here -->
-          </tbody>
-        </table>
+      <!-- Widgets -->
+      <div class="weather__infos">
+        <div class="widget__container--small">
+          <span class="small-widget__label">Terasa Seperti</span>
+          <h3 id="feels-like">0°C</h3>
+        </div>
+        <div class="widget__container--small">
+          <span class="small-widget__label">Kelembaban</span>
+          <h3 id="humidity">0%</h3>
+        </div>
+        <div class="widget__container--small">
+          <span class="small-widget__label">Peluang Hujan</span>
+          <h3 id="rain-chance">0%</h3>
+        </div>
       </div>
+      </div>
+    </div>
 
-      <!-- Ini Perkiraan Cuaca 7 Hari -->
-      <h1>Perkiraan Cuaca 7 Hari Kedepan</h1>
-      <div id="weather-container"></div>
-
-      <!-- Ini Index UV -->
-      <div class="container">
-        <section class="mx-auto my-5">
-          <div class="card panels-card">
-            <div class="rounded-top" ></div>
-            <div class="card-body rounded-bottom text-dark" >
-              <div class="row">
-                <div class="col-6 p-1">
-                  <div class="card" >
-                    <div class="card-body pb-0">
-                      <i class="fas fa-cloud fa-3x pb-4"></i>
-                      <div class="d-flex justify-content-between">
-                        <i class="bi bi-thermometer-sun" ></i>
-                        <p class="mb-0 h5" id="indexUv"></p>
-                      </div>
-                    </div>
-                    <hr />
-                    <div class="card-body pt-0">
-                      <h6 class="font-weight-bold mb-1">Index UV</h6>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 p-1">
-                  <div class="card" >
-                    <div class="card-body pb-0">
-                      <i class="fas fa-sun fa-3x pb-4"></i>
-                      <div class="d-flex justify-content-between">
-                        <i class="bi bi-eye-fill" ></i>
-                        <p class="mb-0 h5" id="visibility"></p>
-                      </div>
-                    </div>
-                    <hr />
-                    <div class="card-body pt-0">
-                      <h6 class="font-weight-bold mb-1">Jarak Pandang</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6 p-1">
-                  <div class="card" >
-                    <div class="card-body pb-0">
-                      <i class="fas fa-tint fa-3x pb-4"></i>
-                      <div class="d-flex justify-content-between">
-                        <i class="bi bi-brightness-high-fill" ></i>
-                        <p class="mb-0 h5 text-end" id="matahari"></p>
-                      </div>
-                    </div>
-                    <hr />
-                    <div class="card-body pt-0">
-                      <h6 class="font-weight-bold mb-1">Posisi Matahari</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <!-- Air Quality -->
+    <div class="widget__container--big aq__container">
+      <div class="weather__header">
+        <div class="weather__heading">
+          <img src="assets/icon/wind 1.png" alt="Wind Icon">
+          <h3>Air Quality</h3>
+        </div>
+        <img class="aq__illustration" src="assets/illustration/Icon Weather 1.png" alt="Wind Icon">
+        <div class="weather__temp">
+          <div class="aqi__number">
+            <h1 id="aq-size">0</h1>
+            <span class="aqi__unit">AQI</span>
+          </div>
+          <span id="keterangan">Undefined</span> 
+        </div>
+      </div>
+      <!-- progress -->
+      <div class="aqi__progress">
+        <div class="widget__container--small">
+          <div class="progress__bar">
+            <div class="progress__label">
+              <span class="progress__label--text">Bersih</span>
+              <span class="progress__label--text">Tercemar</span>
+            </div>
+            <div class="progress-bar__container">
+              <div id="aqi-level"></div>
             </div>
           </div>
-        </section>
+          <!-- <progress value="10" id="persentase" max="200"></progress> -->
+        </div>
       </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </div>
 
-      <!-- Ini Rekomendasi -->
-      <h1>Rekomendasi Kegiatan</h1>
-        <p id="location"></p>
-        <div id="activityList"></div>
+    <!-- Index UV -->
+    <div class="iuv__container">
+      <img src="assets/icon/panas 1.png" alt="UV Icon" />
+      <hr style="width: 100%;" />
+      <div class="iuv__card-list">
+        <img src="assets/icon/panas 1.png" alt="UV Icon" />
+        <div class="iuv__data">
+          <h1 id="indexUv">0 UVI</h1>
+          <span>Jangan lupa pakai sunscreen ya</span>
+        </div>
+      </div>
+    </div>
 
-    
-        <script src="app.js"></script>
+    <!-- Weather Forecast -->
+    <div class="forecast__container">
+      <div class="forecast__today">
+        <h3>Perkiraan Cuaca/Jam</h3>
+        <div id="forecast-today" class="today__container"></div>
+      </div>
+
+      <div class="forecast__next-week">
+        <h3>Next 7 Days</h3>
+        <div id="forecast-week" class="week__container">
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty -->
+    <div class="empty__container"></div>
+
+    <!-- Recommended Task -->
+    <div class="task__container">
+      <h3>Rekomendasi Kegiatan</h3>
+      <div id="list-container" class="tasks__list"></div>
+    </div>
+  </section>
+
+  <!-- Ini Air Quality -->
+  
+  <!-- Ini Perkiraan Cuaca Perjam -->
+  
+  
+  <!-- Ini Perkiraan Cuaca 7 Hari -->
+  
+  
+  <!-- Ini Index UV -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  
+  <!-- Ini Rekomendasi -->
+  
+  
+  <script src="app.js"></script>
 
     <footer>
         <p>This application is the outcome of the Capstone Project RevoU x Kampus Merdeka Batch 3.</p>
