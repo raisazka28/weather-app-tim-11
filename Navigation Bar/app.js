@@ -1,3 +1,16 @@
+function animateValue(obj, end, unit = '') {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / 850, 1);
+    obj.innerHTML = Math.floor(progress * (end - 0) + 0) + unit;
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const locationElement = document.getElementById('location');
   const temperatureElement = document.getElementById('temperature');
@@ -18,7 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
       console.error('Error getting location:', error);
     }
   );
-console.log (position);
+// console.log(position);
   // Mendapatkan data cuaca dari API
   function getWeatherData(latitude, longitude) {
     const apiKey = '559bb81ceb5f6f48b0fb1e4eeb0bca23';
@@ -37,13 +50,13 @@ console.log (position);
         const rainChance = '20%';
 
         // Menampilkan data cuaca ke elemen HTML
-        locationElement.textContent = `Lokasi: ${location}`;
-        temperatureElement.textContent = `Suhu: ${temperature}`;
-        weatherDescriptionElement.textContent = `Cuaca: ${weatherDescription}`;
+        // locationElement.textContent = `Lokasi: ${location}`;
+        animateValue(temperatureElement, parseInt(temperature), '°C')
+        weatherDescriptionElement.textContent = `${weatherDescription}`;
         weatherIconElement.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">`;
-        feelsLikeElement.textContent = `Terasa Seperti: ${feelsLike}`;
-        humidityElement.textContent = `Kelembapan: ${humidity}`;
-        rainChanceElement.textContent = `Peluang Hujan: ${rainChance}`;
+        animateValue(feelsLikeElement, parseInt(feelsLike), '°C')
+        animateValue(humidityElement, parseInt(humidity), '%')
+        animateValue(rainChanceElement, parseInt(rainChance), '%')
       })
       .catch((error) => {
         console.error('Error fetching weather data:', error);
@@ -62,7 +75,7 @@ console.log (position);
         fetch(url)
           .then(response => response.json())
           .then(data => {
-            console.log(data);
+            console.log('aq', data);
             let so2 = data.list[0].components.so2 / 350 * 100
             let co = data.list[0].components.co / 15400 * 100
             let nh3 = data.list[0].components.nh3 / 200 * 100
@@ -72,6 +85,7 @@ console.log (position);
             let pm2_5 = data.list[0].components.pm2_5 / 75 * 100
             let pm10 = data.list[0].components.pm10 / 200 * 100
             let jumlah = (so2 + co + nh3 + no + no2 + o3 + pm2_5 + pm10) / 8
+            let aq = data.list[0].main.aqi
             let classs = "progress w-full "
   
             // document.getElementById('so2').setAttribute('value',so2)
@@ -82,12 +96,14 @@ console.log (position);
             // document.getElementById('o3').setAttribute('value',o3)
             // document.getElementById('pm10').setAttribute('value',pm10)
             // document.getElementById('pm2_5').setAttribute('value',pm2_5)
-            document.getElementById('persentase').setAttribute('value', jumlah)
-            document.getElementById('persentase').setAttribute('class', classs+"progress"+celas(jumlah))
-            document.getElementById('persentase-t').innerText = jumlah.toString().slice(0, 3) + "%"
+            animateValue(document.getElementById('aq-size'), parseInt(aq))
+            // document.getElementById('aq-size').innerText = aq
+            // document.getElementById('persentase').setAttribute('value', jumlah)
+            // document.getElementById('persentase').setAttribute('class', classs+"progress"+celas(jumlah))
+            // document.getElementById('persentase-t').innerText = jumlah.toString().slice(0, 3) + "%"
             document.getElementById('keterangan').innerText = ket(jumlah)
             document.getElementById('keterangan').setAttribute('class',"font-bold text-xl text"+celasColor(jumlah)+"-500")
-            
+            document.getElementById('aqi-level').setAttribute('style', `width: ${jumlah > 300 ? 100 : jumlah / 300 * 100}%`)
           })
           .catch(error => {
             console.error('Error:', error);
@@ -101,6 +117,7 @@ console.log (position);
   });
   
   function ket(value) {
+    console.log('ket', value)
     if (value >= 0 && value <= 20) return "Sangat Sehat"
     if (value >= 21 && value <= 40) return "Sehat"
     if (value >= 41 && value <= 60) return "Cukup Tercemar"
@@ -135,27 +152,28 @@ console.log (position);
         fetch(url)
           .then(response => response.json())
           .then(data => {
-            console.log(data);
+            // console.log(data);
             const weatherData = data.list;
-            const weatherTable = document.getElementById('weatherData');
+            console.log({ weatherData });
+            const weatherTodayContainer = document.getElementById('forecast-today');
   
             // Loop through the weather data and create table rows dynamically
             for (let i = 0; i < weatherData.length; i++) {
               const dateTime = new Date(weatherData[i].dt_txt);
+              const icon = `http://openweathermap.org/img/wn/${weatherData[i].weather[0].icon}.png`;
               const time = `${dateTime.getHours()}:00`;
               const temperature = (weatherData[i].main.temp - 273.15).toFixed(1);
               const weatherDescription = weatherData[i].weather[0].description;
               const humidity = weatherData[i].main.humidity;
   
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                <td>${time}</td>
-                <td>${temperature}</td>
-                <td>${weatherDescription}</td>
-                <td>${humidity}</td>
-              `;
-              console.log(data);
-              weatherTable.appendChild(row);
+              const item = document.createElement('div');
+              item.classList.add('forecast-today__item');
+              item.innerHTML = `
+              <h5>${time}</h5>
+                <img src="${icon}" />
+              <span class="temp__label">${Math.floor(temperature)} °C</span>
+              `
+              weatherTodayContainer.appendChild(item);
             }
           })
           
@@ -180,7 +198,7 @@ console.log (position);
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    const weatherContainer = document.getElementById('weather-container');
+                    const nextWeekContainer = document.getElementById('forecast-week');
                     const forecasts = data.list;
 
                     for (let i = 0; i < forecasts.length; i += 8) {
@@ -190,30 +208,16 @@ console.log (position);
                         const description = forecast.weather[0].description;
                         const iconCode = forecast.weather[0].icon;
 
-                        const weatherCard = document.createElement('div');
-                        weatherCard.classList.add('weather-card');
+                        const item = document.createElement('div');
+                        item.classList.add('forecast-week__item');
+                        item.innerHTML = `
+                        <h5>${getDayName(date)}</h5>
+                        <hr style="width: 100%; margin-top: 8px" />
+                        <img src="https://openweathermap.org/img/w/${iconCode}.png" />
+                        <span class="temp__label">${temperature}°C</span>
+                        `
+                        nextWeekContainer.appendChild(item);
 
-                        const weatherDate = document.createElement('div');
-                        weatherDate.classList.add('weather-date');
-                        weatherDate.textContent = date;
-
-                        const weatherIcon = document.createElement('img');
-                        weatherIcon.classList.add('weather-icon');
-                        weatherIcon.src = `https://openweathermap.org/img/w/${iconCode}.png`;
-
-                        const weatherDescription = document.createElement('div');
-                        weatherDescription.classList.add('weather-description');
-                        weatherDescription.textContent = description;
-
-                        const weatherTemperature = document.createElement('div');
-                        weatherTemperature.textContent = `${temperature}°C`;
-
-                        weatherCard.appendChild(weatherDate);
-                        weatherCard.appendChild(weatherIcon);
-                        weatherCard.appendChild(weatherDescription);
-                        weatherCard.appendChild(weatherTemperature);
-
-                        weatherContainer.appendChild(weatherCard);
                     }
                 })
                 .catch(error => {
@@ -224,6 +228,13 @@ console.log (position);
         console.error("Geolocation is not supported by this browser.");
     }
 });
+
+const getDayName = (date) => {
+  const convertedDate = new Date(date);
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  console.log(date);
+  return days[convertedDate.getDay()];
+}
   
   //ini yang index uv dan jarak pandang
 // Jarak Pandang
@@ -242,8 +253,8 @@ window.addEventListener("DOMContentLoaded", function () {
           .then((data) => {
             const visibility = data.visibility / 1000;
 
-            const visibilityElement = document.getElementById("visibility");
-            visibilityElement.textContent = `${visibility} km`;
+            // const visibilityElement = document.getElementById("visibility");
+            // visibilityElement.textContent = `${visibility} km`;
           })
           .catch((error) => {
             console.log("Error:", error);
@@ -253,8 +264,8 @@ window.addEventListener("DOMContentLoaded", function () {
       },
       function (error) {
         console.log("Error:", error);
-        const visibilityElement = document.getElementById("visibility");
-        visibilityElement.textContent = "Geolocation is not supported by this browser";
+        // const visibilityElement = document.getElementById("visibility");
+        // visibilityElement.textContent = "Geolocation is not supported by this browser";
       }
     );
   } else {
@@ -270,7 +281,7 @@ window.addEventListener("DOMContentLoaded", function () {
   fetch("https://api.openweathermap.org/data/2.5/uvi?lat=-6.2088&lon=106.8456&appid=03f9ab02cf8566dd0bb9cd990be51fa5")
     .then((response) => response.json())
     .then((data) => {
-      document.getElementById("indexUv").innerHTML = `${data.value}`;
+      animateValue(document.getElementById("indexUv"), data.value, ' UVI')
     })
     .catch((error) => {
       console.log("Terjadi kesalahan:", error);
@@ -299,8 +310,8 @@ window.addEventListener("load", function () {
       var sunriseAngle = ((sunriseHours * 60 + sunriseMinutes) / 1440) * 360;
       var sunsetAngle = ((sunsetHours * 60 + sunsetMinutes) / 1440) * 360;
 
-      var sunriseSunsetElement = document.getElementById("matahari");
-      sunriseSunsetElement.innerHTML = sunriseAngle.toFixed(2) + "&deg - " + sunsetAngle.toFixed(2) + "&deg";
+      // var sunriseSunsetElement = document.getElementById("matahari");
+      // sunriseSunsetElement.innerHTML = sunriseAngle.toFixed(2) + "&deg - " + sunsetAngle.toFixed(2) + "&deg";
     })
     .catch(function (error) {
       console.log("Error:", error);
@@ -351,15 +362,17 @@ function getWeather(latitude, longitude) {
               activities.push("Cuaca saat ini tidak dapat dikenali, silakan coba lagi nanti");
           }
 
-          var activityList = document.getElementById("activityList");
-          activityList.innerHTML = "";
+          // var activityList = document.getElementById("activityList");
+          // activityList.innerHTML = "";
+
+          const activitiesContainer = document.getElementById("list-container");
 
           for (var i = 0; i < activities.length; i++) {
               var activityItem = document.createElement("div");
-              activityItem.classList.add("activityItem");
+              activityItem.classList.add("task__item");
               activityItem.textContent = activities[i];
 
-              activityList.appendChild(activityItem);
+              activitiesContainer.appendChild(activityItem);
           }
       }
   };
@@ -373,18 +386,18 @@ function getLocation() {
           var longitude = position.coords.longitude;
 
           var locationText = "Lokasi saat ini: " + latitude.toFixed(2) + ", " + longitude.toFixed(2);
-          document.getElementById("location").textContent = locationText;
+          // document.getElementById("location").textContent = locationText;
 
           getWeather(latitude, longitude);
       }, function () {
           var errorText = document.createElement("p");
           errorText.textContent = "Tidak dapat mengakses lokasi.";
-          document.getElementById("activityList").appendChild(errorText);
+          // document.getElementById("activityList").appendChild(errorText);
       });
   } else {
       var errorText = document.createElement("p");
       errorText.textContent = "Geolokasi tidak didukung oleh browser.";
-      document.getElementById("activityList").appendChild(errorText);
+      // document.getElementById("activityList").appendChild(errorText);
   }
 }
 

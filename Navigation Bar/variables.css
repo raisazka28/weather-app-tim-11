@@ -1,0 +1,28 @@
+:root {
+    /* Fonts */
+    --font-family: 'Inter', sans-serif;
+
+    /* Border Radius */
+    --rounded-medium: 1.2rem;
+    --rounded-small: .6rem;
+
+    /* layout */
+    --main-width: 100%;
+
+    /* color */
+    --main-bg-dark: linear-gradient(180deg, #234072 0%, #000000 94.27%);
+    --white: #FFFFFF;
+    --widget-bg-dark: #1A2840;
+    --widget-secondary-dark: #3B6083;
+    --btn-primary: #3B6083;
+    --btn-secondary: #7F858A;
+}
+
+a, div, h1, h2, h3, h4, h5, p {
+    color: var(--white);
+    font-family: var(--font-family);
+}
+
+a {
+    text-decoration: none;
+}
