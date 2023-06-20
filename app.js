@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
         locationElement.textContent = `${location}`;
         animateValue(temperatureElement, parseInt(temperature), '°C')
         weatherDescriptionElement.textContent = `${weatherDescription}`;
-        weatherIconElement.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">`;
+        weatherIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon">`;
         animateValue(feelsLikeElement, parseInt(feelsLike), '°C')
         animateValue(humidityElement, parseInt(humidity), '%')
         animateValue(rainChanceElement, parseInt(rainChance), '%')
@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const apiKey = '559bb81ceb5f6f48b0fb1e4eeb0bca23';
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+        const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // Loop through the weather data and create table rows dynamically
             for (let i = 0; i < weatherData.length; i++) {
               const dateTime = new Date(weatherData[i].dt_txt);
-              const icon = `http://openweathermap.org/img/wn/${weatherData[i].weather[0].icon}.png`;
+              const icon = `https://openweathermap.org/img/wn/${weatherData[i].weather[0].icon}.png`;
               const time = `${dateTime.getHours()}:00`;
               const temperature = (weatherData[i].main.temp - 273.15).toFixed(1);
               const weatherDescription = weatherData[i].weather[0].description;
@@ -303,7 +303,7 @@ window.addEventListener("load", function () {
 function getWeather(latitude, longitude) {
   var apiKey = "03f9ab02cf8566dd0bb9cd990be51fa5";
 
-  var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
+  var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
 
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
