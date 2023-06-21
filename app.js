@@ -316,8 +316,8 @@ function getWeather(latitude, longitude) {
           var activities = [];
 
           if (description.includes("rain")) {
-              activities.push("Eating indomie");
-              activities.push("Meditating in the room");
+              activities.push("Eat Indomie");
+              activities.push("Meditate in the room");
               activities.push("Watch a movie while drinking hot tea");
           } else if (description.includes("cloud")) {
               activities.push("Take a walk in the park");
@@ -327,22 +327,22 @@ function getWeather(latitude, longitude) {
               var temperature = data.main.temp;
 
               if (temperature > 25) {
-                  activities.push("Swimming or splashing at the beach or pool");
+                  activities.push("Swim or splash at the beach or pool");
                   activities.push("Picnic at the park");
-                  activities.push("Visiting amusement parks");
+                  activities.push("Visit amusement parks");
               } else {
                   activities.push("Take a walk in the park");
                   activities.push("Picnic in the park");
                   activities.push("Play soccer on the field");
               }
           } else if (description.includes("haze")) {
-              activities.push("Listening to music or podcast");
-              activities.push("Staying in the room");
-              activities.push("Cooking warming food");
+              activities.push("Listen to music or podcast");
+              activities.push("Stay inside the room");
+              activities.push("Cook warming food");
           } else {
               activities.push("Exercise for a healthy body");
               activities.push("Develop new skills");
-              activities.push("Meeting people");
+              activities.push("Self deep talk");
           }
 
           const activitiesContainer = document.getElementById("list-container");
