@@ -335,12 +335,14 @@ function getWeather(latitude, longitude) {
                   activities.push("Picnic in the park");
                   activities.push("Play soccer on the field");
               }
-          } else if (description.includes("snow")) {
-              activities.push("Skiing or snowboarding at a ski resort");
-              activities.push("Making a snowman");
-              activities.push("Play snow sports like sledding or snowball fights");
+          } else if (description.includes("haze")) {
+              activities.push("Listening to music or podcast");
+              activities.push("Staying in the room");
+              activities.push("Cooking warming food");
           } else {
-              activities.push("The current weather cannot be recognized, please try again later");
+              activities.push("Exercise for a healthy body");
+              activities.push("Develop new skills");
+              activities.push("Meeting people");
           }
 
           const activitiesContainer = document.getElementById("list-container");
