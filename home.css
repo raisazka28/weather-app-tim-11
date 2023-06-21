@@ -19,6 +19,10 @@ body {
     height: 100vh;
 }
 
+#reject-text {
+    text-align: center;
+}
+
 .container {
     display: grid;
     padding: 0 2.4vw;
