@@ -21,17 +21,51 @@ window.addEventListener('DOMContentLoaded', () => {
   const rainChanceElement = document.getElementById('rain-chance');
 
   // Mendapatkan data cuaca menggunakan geolokasi
+  // navigator.geolocation.getCurrentPosition(
+  //   (position) => {
+  //     console.log(position);
+  //     if (position) { 
+
+  //       const latitude = position.coords.latitude;
+  //       const longitude = position.coords.longitude;
+  //       getWeatherData(latitude, longitude);
+  //     }
+  //   },
+  //   (error) => {
+  //     const containerWeather = document.getElementById('reject');
+  //     containerWeather.classList.add('#error');
+  //     console.error('Error getting location:', error);
+  //   }
+  // );
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      getWeatherData(latitude, longitude);
+      console.log(position);
+      if (position) { 
+        document.getElementById('reject').classList.remove("hide");
+        document.getElementById('reject-text').classList.add("hide");
+        document.getElementsByTagName('body')[0].classList.remove("bg");
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        getWeatherData(latitude, longitude);
+      } else {
+        // displayErrorMessage('Please Allow Location First');
+      }
     },
     (error) => {
+      const containerWeather = document.getElementById('reject');
+      containerWeather.classList.add('container');
       console.error('Error getting location:', error);
+      // displayErrorMessage('Error');
     }
   );
-// console.log(position);
+  
+  function displayErrorMessage(message) {
+    const containerWeather = document.getElementById('reject');
+    containerWeather.classList.add('container');
+    containerWeather.textContent = message;
+    console.log(message);
+  }
+
   // Mendapatkan data cuaca dari API
   function getWeatherData(latitude, longitude) {
     const apiKey = '559bb81ceb5f6f48b0fb1e4eeb0bca23';
@@ -40,7 +74,6 @@ window.addEventListener('DOMContentLoaded', () => {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const location = data.name;
         const temperature = `${data.main.temp}°C`;
         const weatherDescription = data.weather[0].description;
@@ -75,7 +108,6 @@ window.addEventListener('DOMContentLoaded', () => {
         fetch(url)
           .then(response => response.json())
           .then(data => {
-            console.log('aq', data);
             let so2 = data.list[0].components.so2 / 350 * 100
             let co = data.list[0].components.co / 15400 * 100
             let nh3 = data.list[0].components.nh3 / 200 * 100
@@ -106,7 +138,6 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   
   function ket(value) {
-    console.log('ket', value)
     if (value >= 0 && value <= 20) return "Very Healthy"
     if (value >= 21 && value <= 40) return "Healthy"
     if (value >= 41 && value <= 60) return "Moderately Polluted"
@@ -137,13 +168,10 @@ window.addEventListener('DOMContentLoaded', () => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
-      console.log(position);
         fetch(url)
           .then(response => response.json())
           .then(data => {
-            // console.log(data);
             const weatherData = data.list;
-            console.log({ weatherData });
             const weatherTodayContainer = document.getElementById('forecast-today');
   
             // Loop through the weather data and create table rows dynamically
@@ -221,7 +249,6 @@ window.addEventListener('DOMContentLoaded', () => {
 const getDayName = (date) => {
   const convertedDate = new Date(date);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  console.log(date);
   return days[convertedDate.getDay()];
 }
   
@@ -243,17 +270,14 @@ window.addEventListener("DOMContentLoaded", function () {
             const visibility = data.visibility / 1000;
           })
           .catch((error) => {
-            console.log("Error:", error);
             const visibilityElement = document.getElementById("visibility");
             visibilityElement.textContent = "Failed to retrieve visibility data";
           });
       },
       function (error) {
-        console.log("Error:", error);
       }
     );
   } else {
-    console.log("Geolocation is not supported by this browser");
     const visibilityElement = document.getElementById("visibility");
     visibilityElement.textContent = "Geolocation is not supported by this browser";
   }
@@ -268,7 +292,6 @@ window.addEventListener("DOMContentLoaded", function () {
       animateValue(document.getElementById("indexUv"), data.value, ' UVI')
     })
     .catch((error) => {
-      console.log("Terjadi kesalahan:", error);
       document.getElementById("indexUv").innerHTML = "Terjadi kesalahan saat mengambil data indeks UV.";
     });
 });
@@ -295,7 +318,6 @@ window.addEventListener("load", function () {
       var sunsetAngle = ((sunsetHours * 60 + sunsetMinutes) / 1440) * 360;
     })
     .catch(function (error) {
-      console.log("Error:", error);
     });
 });
 
